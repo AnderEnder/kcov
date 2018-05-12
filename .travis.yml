@@ -1,38 +1,27 @@
-# Build matrix / environment variable are explained on:
-# http://about.travis-ci.org/docs/user/build-configuration/
-# This file can be validated on:
-# http://lint.travis-ci.org/
-
 sudo: required
 dist: trusty
-
 before_install: make -f travis/Makefile prepare_environment
-
 os:
   - linux
   - osx
-
 language: cpp
 compiler:
-#  - gcc
   - clang
-
 script:
   - make -f travis/Makefile run-tests
-  - find .
-
-#deploy:
-#  provider: releases
-#  api_key: "GITHUB OAUTH TOKEN"
-#  file: "FILE TO UPLOAD"
-#  skip_cleanup: true
-#  on:
-#    tags: true
-
+  - make -f travis/Makefile pre-deploy
+deploy:
+  provider: releases
+  api_key:
+    secure: K2oA4EvKu8+UDg9/Al7xynHn8x8mowGtsysRqDIHCgnoKuAjfk6032aXIV5YxL50x8gN/GADOotWh5B1odFxAtC8y9L/TeeI6UQNpaTle/Kco+0+GMyE1Qb43aW6VjUsvCBT2++jF3nE1uAUSSUFXN+1R5wmMHroDStVoJEPb7WlzjT+dWnBn8I5e5XehUWyVuRYr1F8gPPRIzfJyGQ9qzjf4jxjWfv8Yl0hWByfhugRdITUGX8biLFIoFK0VPRdMxyTVH94ztwnrbvZl1Ek4lgUUBsPx9wE5iVPY0iClCAL1iQLQAzCIjjouUXFIKSE/+VwSAYTpyh1pi2+MFPfZP28cNxqrkG3ALPgZhdhyMjKqmM6SzDYrYFFde3Pcodgc9kxvUjXjxVQLXtNKi/9OZy2RovzlbzPyumLL9WyTtRHJ5asPzspKPkvpZY2XdRMpCi1XAY6UjK/CvGwY5IqKWj8FbtQxW1RnBDN+cHTd2uZs4G9fND+LRzrTMLtl+HwPq7V96gFeFgyQA0mrMceadcGBu7ml0iSSQG6AdLNxVDFuIp6ilsiY7xLhghv0I2q/JVaMgw7vxEIE3a8CAzPdQTNHzq8VoWvXSg/RoeDgAshnP191Ge8g7c0hyuW/enaDIpH7uBZjFs0WxJ30ReodxkY+s2lEpzo1rtolTZez8U=
+  file:
+    - build/src/kcov_osx_x64
+    - build/src/kcov_linux_x64
+  on:
+    tags: true
 notifications:
   recipients:
     - ander.ender@gmail.com
   email:
     on_success: change
     on_failure: always
-

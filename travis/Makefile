@@ -157,3 +157,7 @@ prepare_linux_clang:
 	sudo apt-get install -qq --force-yes -y clang-3.9 libboost-all-dev binutils-dev
 
 prepare_environment: prepare_${TRAVIS_OS_NAME} prepare_${TRAVIS_OS_NAME}_${CC}
+
+pre-deploy:
+	cp build/src/kcov build/src/kcov_${TRAVIS_OS_NAME}_x64
+	tar -C build/src -czvf kcov_${TRAVIS_OS_NAME}_x64.tar.gz kcov
