@@ -14,7 +14,8 @@ deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
   file:
-    - build/src/kcov_${TRAVIS_OS_NAME}_x64
+    - build/src/kcov_osx_x64
+    - build/src/kcov_linux_x64
   on:
     tags: true
 notifications:
