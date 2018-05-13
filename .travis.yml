@@ -11,7 +11,7 @@ compiler:
 script:
   - make -f travis/Makefile run-tests
   - cp build/src/kcov build/src/kcov-bin_${TRAVIS_OS_NAME}_x64
-  - echo $TRAVIS_OS_NAME | grep linux && (sudo pip install exodus-bundler && exodus build/src/kcov && mv exodus-kcov-bundle.sh kcov-bundle_linux_x64) || true
+  - echo $TRAVIS_OS_NAME | grep linux && (sudo pip install exodus-bundler && exodus build/src/kcov > /dev/null && mv exodus-kcov-bundle.sh kcov-bundle_linux_x64) || true
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
