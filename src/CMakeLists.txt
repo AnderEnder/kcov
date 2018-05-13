@@ -5,6 +5,7 @@ include(TargetArch)
 target_architecture(CMAKE_TARGET_ARCHITECTURES)
 message(STATUS "Target architectures: ${CMAKE_TARGET_ARCHITECTURES}")
 
+add_definitions(-DCURL_STATICLIB)
 find_package (ZLIB REQUIRED)
 find_package (CURL)
 
