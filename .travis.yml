@@ -8,8 +8,7 @@ language: cpp
 compiler:
   - clang
 
-stages:
-  script:
+script:
   - make -f travis/Makefile run-tests
   - cp build/src/kcov build/src/kcov-bin_${TRAVIS_OS_NAME}_x64
   - grep linux $TRAVIS_OS_NAME && pip install exodus-bundler && exodus build/src/kcov && mv exodus-kcov-bundle.sh kcov-bundle_linux_x64
